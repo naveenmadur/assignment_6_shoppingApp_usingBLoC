@@ -13,14 +13,14 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kbackgroundColor,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: kgrey),
-        backgroundColor: kbackgroundColor,
+        iconTheme: kAppBarIconThemeData,
+        backgroundColor: kBackgroundColor,
         elevation: 0,
         title: const Text(
           'Cart',
-          style: ktitleTextStyle,
+          style: kTitleTextStyle,
         ),
         centerTitle: true,
       ),
@@ -33,33 +33,38 @@ class CartScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    isEmpty ? const Spacer() : const Text(''),
                     isEmpty
                         ? const Text(
                             'Add some Items first',
-                            style: kpriceTextStyle,
+                            style: kPriceTextStyle,
                           )
                         : Expanded(
-                          child: ListView.builder(
+                            child: ListView.builder(
                               itemBuilder: (context, index) =>
                                   CartItem(product: state.cart[index]),
                               itemCount: state.cart.length,
                             ),
-                        ),
-                    const Spacer(),
+                          ),
+                    isEmpty ? const Spacer() : const Text(''),
                     GestureDetector(
                       onTap: () {
-                        BlocProvider.of<ProductsBloc>(context)
-                            .add(NavigateToHomeEvent());
+                        isEmpty ? null : BlocProvider.of<ProductsBloc>(context).add(AddToOrdersEvent(orders: state.cart));
+                        isEmpty
+                            ? BlocProvider.of<ProductsBloc>(context)
+                                .add(NavigateToHomeEvent())
+                            : BlocProvider.of<ProductsBloc>(context)
+                                .add(NavigateToOrdersScreen());
                         isEmpty
                             ? Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => const HomeScreen()))
-                            : Navigator.of(context).push(MaterialPageRoute(
+                            : Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (context) => const OrdersScreen()));
                       },
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 30),
-                        color: kgreenAccent,
+                        color: kGreenAccent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 160, vertical: 15),
                         child: const Text('BUY'),

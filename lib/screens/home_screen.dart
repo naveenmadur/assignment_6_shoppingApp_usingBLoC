@@ -23,18 +23,18 @@ class HomeScreen extends StatelessWidget {
               Scaffold.of(context).openDrawer();
             },
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            color: kgrey,
+            color: kGrey,
           );
         }),
-        backgroundColor: kbackgroundColor,
+        backgroundColor: kBackgroundColor,
         title: const Text(
           'SHOPPING',
-          style: ktitleTextStyle,
+          style: kTitleTextStyle,
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            color: kgrey,
+            color: kGrey,
             onPressed: () {},
           ),
           BlocBuilder<ProductsBloc, ProductsState>(
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               if (state is GetProductsState) {
                 return Badge(
                     value: state.cart.length.toString(),
-                    color: kgreenAccent,
+                    color: kGreenAccent,
                     child: IconButton(
                       onPressed: () {
                         BlocProvider.of<ProductsBloc>(context)
@@ -50,16 +50,16 @@ class HomeScreen extends StatelessWidget {
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartScreen()));
                       },
                       icon: const Icon(Icons.shopping_cart),
-                      color: kgrey,
+                      color: kGrey,
                     ));
               }
               return const Badge(
                   value: '0',
-                  color: kgreenAccent,
+                  color: kGreenAccent,
                   child: IconButton(
                     onPressed: null,
                     icon: Icon(Icons.shopping_cart),
-                    color: kgrey,
+                    color: kGrey,
                   ));
             },
           ),
@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       body: Container(
-        color: kbackgroundColor,
+        color: kBackgroundColor,
         padding: const EdgeInsets.all(10),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

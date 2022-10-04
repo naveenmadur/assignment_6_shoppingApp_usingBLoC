@@ -20,7 +20,13 @@ class AddToCartEvent extends ProductsEvent {
   AddToCartEvent({required this.index});
 }
 
+class AddToOrdersEvent extends ProductsEvent{
+  final List<ProductModel> orders;
+  AddToOrdersEvent({required this.orders});
+}
 
 class NavigateToCartScreenEvent extends ProductsEvent{}
 
 class NavigateToHomeEvent extends ProductsEvent{}
+
+class NavigateToOrdersScreen extends ProductsEvent{}

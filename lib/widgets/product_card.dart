@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               child: Container(
-                padding: kcardPadding,
+                padding: kCardPadding,
                 height: MediaQuery.of(context).size.height / 5.2,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -44,11 +44,11 @@ class ProductCard extends StatelessWidget {
                                 child: Text(state.products[index].title!,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
-                                    style: ktitleTextStyle),
+                                    style: kTitleTextStyle),
                               ),
                               IconButton(
                                 icon: const Icon(Icons.favorite_outline),
-                                color: kgreenAccent,
+                                color: kGreenAccent,
                                 onPressed: () {},
                               )
                             ],
@@ -61,7 +61,7 @@ class ProductCard extends StatelessWidget {
                           ),
                           Text(
                             '\$ ${state.products[index].price!.toString()}',
-                            style: kpriceTextStyle,
+                            style: kPriceTextStyle,
                           ),
                           Row(
                             children: [
@@ -72,7 +72,7 @@ class ProductCard extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    color: kgreenAccent,
+                                    color: kGreenAccent,
                                   ),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30, vertical: 10),
@@ -87,7 +87,7 @@ class ProductCard extends StatelessWidget {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: kgreenAccent,
+                                        backgroundColor: kGreenAccent,
                                         child: IconButton(
                                           icon: const Icon(Icons.remove),
                                           onPressed: () {
@@ -101,7 +101,7 @@ class ProductCard extends StatelessWidget {
                                       Text(state.products[index].quantity
                                           .toString()),
                                       CircleAvatar(
-                                        backgroundColor: kgreenAccent,
+                                        backgroundColor: kGreenAccent,
                                         child: IconButton(
                                           icon: const Icon(Icons.add),
                                           onPressed: () {

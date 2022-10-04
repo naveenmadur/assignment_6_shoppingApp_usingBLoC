@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app_using_bloc/model/product_model.dart';
 import 'package:shopping_app_using_bloc/repository/products_repo.dart';
@@ -56,5 +57,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         cart: cart,
         orders: orders,
         status: Status.success)));
+
+    on<NavigateToOrdersScreen>((event, emit) => emit(GetProductsState()
+        .copyWith(
+            products: products,
+            cart: cart,
+            orders: orders,
+            status: Status.success)));
   }
 }
