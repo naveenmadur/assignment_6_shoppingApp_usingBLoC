@@ -25,27 +25,30 @@ class OrdersScreen extends StatelessWidget {
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           if (state is GetProductsState) {
-            final bool isEmpty = state.cart.isEmpty;
+            final bool isEmpty = state.orders.isEmpty;
             return SafeArea(
               child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    isEmpty ? const Spacer() : const Text(''),
-                    isEmpty
-                        ? const Text(
-                            'No purchase history available',
-                            style: kPriceTextStyle,
-                          )
-                        : Expanded(
-                            child: ListView.builder(
-                              itemBuilder: (context, index) =>
-                                  OrderItem(product: state.cart[index]),
-                              itemCount: state.cart.length,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      isEmpty ? const Spacer() : const Text(''),
+                      isEmpty
+                          ? const Text(
+                              'No purchase history available',
+                              style: kPriceTextStyle,
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                itemBuilder: (context, index) =>
+                                    OrderItem(product: state.orders[index]),
+                                itemCount: state.orders.length,
+                              ),
                             ),
-                          ),
-                    isEmpty ? const Spacer() : const Text(''),
-                  ],
+                      isEmpty ? const Spacer() : const Text(''),
+                    ],
+                  ),
                 ),
               ),
             );

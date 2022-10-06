@@ -1,16 +1,68 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_app_using_bloc/model/product_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopping_app_using_bloc/preferences/cart_shared_preference.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  List<String> localCartList = [];
+  List<ProductModel> loadedCartProducts = [];
+
+  @override
+  void initState() {
+    // _init();
+    super.initState();
+  }
+
+  // void storeData(ProductModel product) {
+  //   ProductModel prod = ProductModel(
+  //       id: product.id,
+  //       title: product.title,
+  //       imageUrl: product.imageUrl,
+  //       quantity: product.quantity,
+  //       price: product.price,
+  //       );
+  //       String encodedProd = jsonEncode(prod);
+  //       print(encodedProd);
+  //       localCartList.add(encodedProd);
+  // print(localCartList);
+  //     _sharedPreferences.setStringList('localCart', localCartList);
+  // }
+
+  // void _init() async {
+  //   _sharedPreferences = await SharedPreferences.getInstance();
+  //   List<String>? loadedList = _sharedPreferences.getStringList('localCart');
+  //   if(!(loadedList == null)){
+  //   for(int i=0; i<loadedList.length; i++){
+  //     ProductModel prod = ProductModel.fromJson(jsonDecode(loadedList[i]));
+  //     loadedCartProducts.add(prod);
+  //   }
+  //   sendLoadedToBloc();
+  //   print(loadedCartProducts[0].title);
+  //   }
+  // }
+
+  // void sendLoadedToBloc(){
+  //   BlocProvider.of<ProductsBloc>(context).add(LoadCartItems(cart: loadedCartProducts));
+  // }
+
+  @override
   Widget build(BuildContext context) {
+    ProductModel().toJson();
+
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         return Expanded(
@@ -66,8 +118,10 @@ class ProductCard extends StatelessWidget {
                           Row(
                             children: [
                               GestureDetector(
-                                onTap: (){
-                                  BlocProvider.of<ProductsBloc>(context).add(AddToCartEvent(index: index));
+                                onTap: () {
+                                  BlocProvider.of<ProductsBloc>(context)
+                                      .add(AddToCartEvent(index: index));
+                                  // storeData(state.products[index]);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -98,7 +152,7 @@ class ProductCard extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      Text(state.products[index].quantity
+                                      Text((state.products[index].quantity ?? 0)
                                           .toString()),
                                       CircleAvatar(
                                         backgroundColor: kGreenAccent,

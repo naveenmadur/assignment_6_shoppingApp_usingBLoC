@@ -7,5 +7,7 @@ const TextStyle kOrderTitleTextStyle = TextStyle(color: kGrey, fontSize: 15);
 const TextStyle kCartTitleTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
 
 const EdgeInsetsGeometry kCardPadding = EdgeInsets.only(left: 20, top: 10, bottom: 20, right: 15);
-const IconThemeData kAppBarIconThemeData = IconThemeData(color: kGrey);
 const EdgeInsetsGeometry kCartItemMargin =  EdgeInsets.only(left: 10, right: 10, bottom: 8);
+const EdgeInsetsGeometry kAppDrawerPadding = EdgeInsets.symmetric(horizontal: 15);
+
+const IconThemeData kAppBarIconThemeData = IconThemeData(color: kGrey);

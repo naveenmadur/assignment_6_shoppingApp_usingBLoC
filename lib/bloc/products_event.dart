@@ -10,7 +10,7 @@ class IncreaseQuantityEvent extends ProductsEvent {
   IncreaseQuantityEvent({required this.index});
 }
 
-class DecreaseQuantityEvent extends ProductsEvent{
+class DecreaseQuantityEvent extends ProductsEvent {
   DecreaseQuantityEvent({required this.index});
   final int index;
 }
@@ -20,13 +20,29 @@ class AddToCartEvent extends ProductsEvent {
   AddToCartEvent({required this.index});
 }
 
-class AddToOrdersEvent extends ProductsEvent{
+class AddToOrdersEvent extends ProductsEvent {
   final List<ProductModel> orders;
   AddToOrdersEvent({required this.orders});
 }
 
-class NavigateToCartScreenEvent extends ProductsEvent{}
+class NavigateToCartScreenEvent extends ProductsEvent {}
 
-class NavigateToHomeEvent extends ProductsEvent{}
+class NavigateToHomeEvent extends ProductsEvent {}
 
-class NavigateToOrdersScreen extends ProductsEvent{}
+class NavigateToOrdersScreenEvent extends ProductsEvent {}
+
+class AddCartToSharedPreferenceEvent extends ProductsEvent {
+  final List<ProductModel> prods;
+  AddCartToSharedPreferenceEvent({required this.prods});
+}
+
+class LoadCartFromSharedPreferenceEvent extends ProductsEvent {}
+
+class AddOrdersToSharedPreferenceEvent extends ProductsEvent{
+  final List<ProductModel> orders;
+  AddOrdersToSharedPreferenceEvent({required this.orders});
+}
+
+class LoadOrdersFromSharedPreferenceEvent extends ProductsEvent{}
+
+class BuyEvent extends ProductsEvent {}

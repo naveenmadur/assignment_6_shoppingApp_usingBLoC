@@ -3,6 +3,7 @@ import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:shopping_app_using_bloc/model/product_model.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({Key? key, required this.product}) : super(key: key);
@@ -10,8 +11,10 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final month = DateFormat.MMM().format(DateTime.now());
     return Card(
+      elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         leading: SizedBox(
@@ -28,12 +31,16 @@ class OrderItem extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: kOrderTitleTextStyle,
         ),
-        subtitle: Text(product.title!,
-            maxLines: 1, softWrap: true, overflow: TextOverflow.ellipsis,),
+        subtitle: Text(
+          product.title!,
+          maxLines: 1,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+        ),
         trailing: Container(
           decoration: BoxDecoration(border: Border.all(color: kGreenAccent)),
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Text('\$ ${(product.price! * product.quantity).toString()}'),
+          child: Text('\$ ${(product.price!).toString()}'),
         ),
       ),
     );

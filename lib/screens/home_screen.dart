@@ -8,8 +8,21 @@ import 'package:shopping_app_using_bloc/widgets/badge.dart';
 import 'package:shopping_app_using_bloc/widgets/drawer.dart';
 import 'package:shopping_app_using_bloc/widgets/product_list.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<ProductsBloc>(context).add(LoadCartFromSharedPreferenceEvent());
+    BlocProvider.of<ProductsBloc>(context).add(LoadOrdersFromSharedPreferenceEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,20 +60,22 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () {
                         BlocProvider.of<ProductsBloc>(context)
                             .add(NavigateToCartScreenEvent());
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const CartScreen()));
                       },
                       icon: const Icon(Icons.shopping_cart),
                       color: kGrey,
                     ));
               }
-              return const Badge(
-                  value: '0',
-                  color: kGreenAccent,
-                  child: IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.shopping_cart),
-                    color: kGrey,
-                  ));
+              return const Text('');
+              // return const Badge(
+              //     value: '0',
+              //     color: kGreenAccent,
+              //     child: IconButton(
+              //       onPressed: null,
+              //       icon: Icon(Icons.shopping_cart),
+              //       color: kGrey,
+              //     ));
             },
           ),
         ],

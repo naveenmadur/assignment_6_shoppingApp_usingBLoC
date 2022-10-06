@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
+import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:shopping_app_using_bloc/screens/cart_screen.dart';
 import 'package:shopping_app_using_bloc/screens/home_screen.dart';
@@ -24,50 +25,60 @@ class AppDrawer extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text(
-              'Shopping',
-              style: kTitleTextStyle,
+          Container(
+            padding: kAppDrawerPadding,
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.home),
+                  title: const Text(
+                    'Shopping',
+                    style: kTitleTextStyle,
+                  ),
+                  onTap: () {
+                    BlocProvider.of<ProductsBloc>(context)
+                        .add(NavigateToHomeEvent());
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  },
+                ),
+                const Divider(
+                  thickness: 1,
+                  color: kBlack,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.shopping_cart),
+                  title: const Text(
+                    'Cart',
+                    style: kTitleTextStyle,
+                  ),
+                  onTap: () {
+                    BlocProvider.of<ProductsBloc>(context)
+                        .add(NavigateToCartScreenEvent());
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const CartScreen()));
+                  },
+                ),
+                const Divider(
+                  thickness: 1,
+                  color: kBlack,
+                ),
+                ListTile(
+                  leading: const Icon(Icons.history),
+                  title: const Text(
+                    'Orders',
+                    style: kTitleTextStyle,
+                  ),
+                  onTap: () {
+                    BlocProvider.of<ProductsBloc>(context)
+                        .add(NavigateToOrdersScreenEvent());
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const OrdersScreen()));
+                  },
+                )
+              ],
             ),
-            onTap: () {
-              BlocProvider.of<ProductsBloc>(context).add(NavigateToHomeEvent());
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
           ),
-          const Divider(
-            thickness: 3,
-          ),
-          ListTile(
-            leading: const Icon(Icons.shopping_cart),
-            title: const Text(
-              'Cart',
-              style: kTitleTextStyle,
-            ),
-            onTap: () {
-              BlocProvider.of<ProductsBloc>(context)
-                  .add(NavigateToCartScreenEvent());
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CartScreen()));
-            },
-          ),
-          const Divider(
-            thickness: 3,
-          ),
-          ListTile(
-            leading: const Icon(Icons.history),
-            title: const Text(
-              'Orders',
-              style: kTitleTextStyle,
-            ),
-            onTap: () {
-              BlocProvider.of<ProductsBloc>(context)
-                  .add(NavigateToOrdersScreen());
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const OrdersScreen()));
-            },
-          )
         ],
       ),
     );
