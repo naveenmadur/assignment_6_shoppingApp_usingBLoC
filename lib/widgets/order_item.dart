@@ -39,7 +39,7 @@ class OrderItem extends StatelessWidget {
         ),
         trailing: Container(
           decoration: BoxDecoration(border: Border.all(color: kGreenAccent)),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: kOrderItemPricePadding,
           child: Text('\$ ${(product.price!).toString()}'),
         ),
       ),

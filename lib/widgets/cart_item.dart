@@ -26,7 +26,7 @@ class CartItem extends StatelessWidget {
         subtitle: Text('x ${product.quantity.toString()}'),
         trailing: Container(
           decoration: BoxDecoration(border: Border.all(color: kGreenAccent)),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: kCartItemPricePadding,
           child: Text('\$ ${(product.price!).toString()}'),
         ),
       ),

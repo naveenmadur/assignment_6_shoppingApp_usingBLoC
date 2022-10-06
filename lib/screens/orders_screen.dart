@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
+import 'package:shopping_app_using_bloc/constants/text_constants.dart';
 import 'package:shopping_app_using_bloc/widgets/order_item.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -16,10 +17,7 @@ class OrdersScreen extends StatelessWidget {
         iconTheme: kAppBarIconThemeData,
         backgroundColor: kBackgroundColor,
         elevation: 0,
-        title: const Text(
-          'Orders',
-          style: kTitleTextStyle,
-        ),
+        title: kOrdersScreenAppBarText,
         centerTitle: true,
       ),
       body: BlocBuilder<ProductsBloc, ProductsState>(
@@ -29,7 +27,7 @@ class OrdersScreen extends StatelessWidget {
             return SafeArea(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: kOrdersScreenBodyPadding,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

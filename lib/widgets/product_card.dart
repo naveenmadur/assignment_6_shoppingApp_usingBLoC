@@ -4,6 +4,7 @@ import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_app_using_bloc/constants/text_constants.dart';
 import 'package:shopping_app_using_bloc/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app_using_bloc/preferences/cart_shared_preference.dart';
@@ -26,38 +27,6 @@ class _ProductCardState extends State<ProductCard> {
     // _init();
     super.initState();
   }
-
-  // void storeData(ProductModel product) {
-  //   ProductModel prod = ProductModel(
-  //       id: product.id,
-  //       title: product.title,
-  //       imageUrl: product.imageUrl,
-  //       quantity: product.quantity,
-  //       price: product.price,
-  //       );
-  //       String encodedProd = jsonEncode(prod);
-  //       print(encodedProd);
-  //       localCartList.add(encodedProd);
-  // print(localCartList);
-  //     _sharedPreferences.setStringList('localCart', localCartList);
-  // }
-
-  // void _init() async {
-  //   _sharedPreferences = await SharedPreferences.getInstance();
-  //   List<String>? loadedList = _sharedPreferences.getStringList('localCart');
-  //   if(!(loadedList == null)){
-  //   for(int i=0; i<loadedList.length; i++){
-  //     ProductModel prod = ProductModel.fromJson(jsonDecode(loadedList[i]));
-  //     loadedCartProducts.add(prod);
-  //   }
-  //   sendLoadedToBloc();
-  //   print(loadedCartProducts[0].title);
-  //   }
-  // }
-
-  // void sendLoadedToBloc(){
-  //   BlocProvider.of<ProductsBloc>(context).add(LoadCartItems(cart: loadedCartProducts));
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +54,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.only(left: 10),
+                      margin: kProductCardContainerPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -128,14 +97,13 @@ class _ProductCardState extends State<ProductCard> {
                                     borderRadius: BorderRadius.circular(30),
                                     color: kGreenAccent,
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 10),
-                                  child: const Text('Add'),
+                                  padding: kProductCardAddButtonPadding,
+                                  child: kAddText,
                                 ),
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
+                                  padding: kProductCardAddIconPadding,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -143,7 +111,7 @@ class _ProductCardState extends State<ProductCard> {
                                       CircleAvatar(
                                         backgroundColor: kGreenAccent,
                                         child: IconButton(
-                                          icon: const Icon(Icons.remove),
+                                          icon: kRemoveIcon,
                                           onPressed: () {
                                             BlocProvider.of<ProductsBloc>(
                                                     context)
@@ -157,7 +125,7 @@ class _ProductCardState extends State<ProductCard> {
                                       CircleAvatar(
                                         backgroundColor: kGreenAccent,
                                         child: IconButton(
-                                          icon: const Icon(Icons.add),
+                                          icon: kAddIcon,
                                           onPressed: () {
                                             BlocProvider.of<ProductsBloc>(
                                                     context)

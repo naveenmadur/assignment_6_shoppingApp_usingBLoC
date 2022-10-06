@@ -72,10 +72,9 @@ class _CartScreenState extends State<CartScreen> {
                         }
                       },
                       child: Container(
-                        margin: const EdgeInsets.only(bottom: 30),
+                        margin: kCartScreenBuyButtonMargin,
                         color: kGreenAccent,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 160, vertical: 15),
+                        padding: kCartScreenBuyButtonPadding,
                         child: const Text('BUY'),
                       ),
                     ),
