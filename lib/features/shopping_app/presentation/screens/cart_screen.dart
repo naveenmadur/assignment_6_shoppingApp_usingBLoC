@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
-import 'package:shopping_app_using_bloc/screens/home_screen.dart';
-import 'package:shopping_app_using_bloc/screens/orders_screen.dart';
-import 'package:shopping_app_using_bloc/widgets/cart_item.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/bloc/products_bloc.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/home_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/orders_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -15,8 +15,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +64,8 @@ class _CartScreenState extends State<CartScreen> {
                         if (!isEmpty) {
                           BlocProvider.of<ProductsBloc>(context)
                               .add(AddToOrdersEvent(orders: state.cart));
+                          BlocProvider.of<ProductsBloc>(context)
+                              .add(BuyEvent());
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (context) => const OrdersScreen()));

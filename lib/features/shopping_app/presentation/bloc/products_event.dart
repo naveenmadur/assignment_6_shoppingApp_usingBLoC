@@ -21,7 +21,7 @@ class AddToCartEvent extends ProductsEvent {
 }
 
 class AddToOrdersEvent extends ProductsEvent {
-  final List<ProductModel> orders;
+  final List<ProductEntity> orders;
   AddToOrdersEvent({required this.orders});
 }
 
@@ -32,14 +32,14 @@ class NavigateToHomeEvent extends ProductsEvent {}
 class NavigateToOrdersScreenEvent extends ProductsEvent {}
 
 class AddCartToSharedPreferenceEvent extends ProductsEvent {
-  final List<ProductModel> prods;
+  final List<ProductEntity> prods;
   AddCartToSharedPreferenceEvent({required this.prods});
 }
 
 class LoadCartFromSharedPreferenceEvent extends ProductsEvent {}
 
 class AddOrdersToSharedPreferenceEvent extends ProductsEvent{
-  final List<ProductModel> orders;
+  final List<ProductEntity> orders;
   AddOrdersToSharedPreferenceEvent({required this.orders});
 }
 

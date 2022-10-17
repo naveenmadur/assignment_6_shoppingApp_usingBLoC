@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:shopping_app_using_bloc/constants/text_constants.dart';
-import 'package:shopping_app_using_bloc/screens/cart_screen.dart';
-import 'package:shopping_app_using_bloc/widgets/badge.dart';
-import 'package:shopping_app_using_bloc/widgets/drawer.dart';
-import 'package:shopping_app_using_bloc/widgets/product_list.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/bloc/products_bloc.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/cart_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/badge.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/drawer.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/product_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,8 +19,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<ProductsBloc>(context).add(LoadCartFromSharedPreferenceEvent());
-    BlocProvider.of<ProductsBloc>(context).add(LoadOrdersFromSharedPreferenceEvent());
+    BlocProvider.of<ProductsBloc>(context)
+        .add(LoadCartFromSharedPreferenceEvent());
+    BlocProvider.of<ProductsBloc>(context)
+        .add(LoadOrdersFromSharedPreferenceEvent());
     super.initState();
   }
 
@@ -66,14 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ));
               }
               return const Text('');
-              // return const Badge(
-              //     value: '0',
-              //     color: kGreenAccent,
-              //     child: IconButton(
-              //       onPressed: null,
-              //       icon: Icon(Icons.shopping_cart),
-              //       color: kGrey,
-              //     ));
             },
           ),
         ],

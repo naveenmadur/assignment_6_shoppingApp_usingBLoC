@@ -1,30 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/model/product_model.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/data/data_source/product_list_local_data_source.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/domain/use_cases/get_products_use_case.dart';
 import 'package:shopping_app_using_bloc/preferences/cart_shared_preference.dart';
 import 'package:shopping_app_using_bloc/preferences/orders_shared_preference.dart';
-import 'package:shopping_app_using_bloc/repository/products_repo.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
-  List<ProductModel> products = [];
-  List<ProductModel> cart = [];
-  List<ProductModel> orders = [];
+  final GetProductListUseCase getProductListUseCase;
+
+  List<ProductEntity> products = [];
+  List<ProductEntity> cart = [];
+  List<ProductEntity> orders = [];
   List<String>? cartIds = [];
 
-  ProductsBloc() : super(InitialState()) {
+  ProductsBloc({
+    required this.getProductListUseCase,
+  }) : super(InitialState()) {
     //Fetching Products from http
+    // on<GetProductsEvent>((event, emit) async {
+    //   try {
+    //     final posts = await ProductsRepository().fetchProductData();
+    //     products = posts;
+    //     return emit(GetProductsState()
+    //         .copyWith(products: products, status: Status.success));
+    //   } catch (error) {
+    //     return emit(GetProductsState().copyWith(status: Status.failure));
+    //   }
+    // });
+
+    //! Using clean code...
     on<GetProductsEvent>((event, emit) async {
-      try {
-        final posts = await ProductsRepository().fetchProductData();
-        products = posts;
-        return emit(GetProductsState()
+      final result = await getProductListUseCase.call();
+      result.fold((l) {
+        emit(ErrorState(message: l.message));
+      }, (r) {
+        products = r;
+        emit(GetProductsState()
             .copyWith(products: products, status: Status.success));
-      } catch (error) {
-        return emit(GetProductsState().copyWith(status: Status.failure));
-      }
+      });
     });
 
     //Increasing quantity
@@ -66,11 +82,11 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     //Adding cart items to Orders
     on<AddToOrdersEvent>((event, emit) {
       orders.addAll(event.orders);
-      add(AddOrdersToSharedPreferenceEvent(orders: orders));
       for (int i = 0; i < event.orders.length; i++) {
         event.orders[i].quantity = 0;
         event.orders[i].isAddedToCart = false;
       }
+      add(AddOrdersToSharedPreferenceEvent(orders: orders));
       cart.clear();
 
       emit(GetProductsState().copyWith(
@@ -81,7 +97,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       add(NavigateToOrdersScreenEvent());
       add(BuyEvent());
     });
-
 
     //----------------------------Navigation's BLoC----------------------------
     //Navigating to cart screen
@@ -110,7 +125,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     //----------------------------Cart Shared Preferences----------------------------
     //Adding cart items to shared preferences
-    on<AddCartToSharedPreferenceEvent>((event, emit) {
+    on<AddCartToSharedPreferenceEvent>((event, emit) async {
+      // addToSharedPreferencesUseCase.addToSF(event.prods);
       CartSharedPreference.saveProds(event.prods);
       emit(GetProductsState()
           .copyWith(products: products, cart: cart, orders: orders));
@@ -118,7 +134,15 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     //Loading cart items from shared preferences
     on<LoadCartFromSharedPreferenceEvent>((event, emit) async {
-      List<ProductModel>? loadedCart = await CartSharedPreference.loadData();
+      // final result = await getItemsFromSharedPrefsUseCase.call();
+      // result.fold((l) {
+      //   emit(ErrorState(message: l.message));
+      // }, (r) {
+      //   cart = r;
+      //   emit(GetProductsState()
+      //       .copyWith(products: products, cart: cart, status: Status.success));
+      // });
+      List<ProductEntity>? loadedCart = await CartSharedPreference.loadData();
       if (loadedCart == null) {
         emit(GetProductsState().copyWith(
             products: products,
@@ -145,7 +169,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     //Loading orders from shared preferences
     on<LoadOrdersFromSharedPreferenceEvent>((event, emit) async {
-      List<ProductModel>? loadedOrders = await OrdersSharedPreference.loadData();
+      List<ProductEntity>? loadedOrders =
+          await OrdersSharedPreference.loadData();
       if (loadedOrders == null) {
         emit(GetProductsState().copyWith(
             products: products,

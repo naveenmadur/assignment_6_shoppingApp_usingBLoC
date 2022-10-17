@@ -1,18 +1,14 @@
-class ProductModel {
-  int? id;
-  String? title, description, imageUrl;
-  num? price;
-  int? quantity;
-  bool isAddedToCart = false;
+import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
 
+class ProductModel extends ProductEntity {
   ProductModel(
-      {this.id,
-      this.title,
-      this.description,
-      this.imageUrl,
-      this.price,
-      this.quantity,
-      this.isAddedToCart = false});
+      {super.id,
+      super.title,
+      super.description,
+      super.imageUrl,
+      super.price,
+      super.quantity,
+      super.isAddedToCart});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -25,7 +21,7 @@ class ProductModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
     data['price'] = price;
@@ -36,4 +32,14 @@ class ProductModel {
     return data;
   }
 
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        price,
+        description,
+        imageUrl,
+        quantity,
+        isAddedToCart,
+      ];
 }

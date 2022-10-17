@@ -16,16 +16,17 @@ class GetProductsState extends ProductsState {
       this.cart = const [],
       this.orders = const [],
       this.status = Status.failure});
+  
   @override
-  final List<ProductModel> products;
-  final List<ProductModel> cart;
-  final List<ProductModel> orders;
+  final List<ProductEntity> products;
+  final List<ProductEntity> cart;
+  final List<ProductEntity> orders;
   final Status status;
 
   GetProductsState copyWith(
-      {List<ProductModel>? products,
-      List<ProductModel>? cart,
-      List<ProductModel>? orders,
+      {List<ProductEntity>? products,
+      List<ProductEntity>? cart,
+      List<ProductEntity>? orders,
       Status? status}) {
 
     return GetProductsState(
@@ -39,6 +40,11 @@ class GetProductsState extends ProductsState {
   String toString() {
     return 'Status: $status, products: ${products.length}';
   }
+}
+
+class ErrorState extends ProductsState {
+  final String message;
+  ErrorState({required this.message});
 }
 
 

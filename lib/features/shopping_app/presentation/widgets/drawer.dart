@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/bloc/products_bloc.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
 import 'package:shopping_app_using_bloc/constants/text_constants.dart';
-import 'package:shopping_app_using_bloc/screens/cart_screen.dart';
-import 'package:shopping_app_using_bloc/screens/home_screen.dart';
-import 'package:shopping_app_using_bloc/screens/orders_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/bloc/products_bloc.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/cart_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/home_screen.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/orders_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);

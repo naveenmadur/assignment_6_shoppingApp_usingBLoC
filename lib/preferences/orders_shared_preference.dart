@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopping_app_using_bloc/model/product_model.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
+
+import '../features/shopping_app/data/model/product_model.dart';
 
 class OrdersSharedPreference {
   static final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  static Future saveProds(List<ProductModel> prodList) async {
+  static Future saveProds(List<ProductEntity> prodList) async {
     final SharedPreferences prefs = await _prefs;
     String encodedData = jsonEncode(prodList);
     await prefs.setString("orderItems", encodedData);
@@ -26,5 +28,4 @@ class OrdersSharedPreference {
       return decode(json);
     }
   }
-
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app_using_bloc/constants/color_constants.dart';
 import 'package:shopping_app_using_bloc/constants/constants.dart';
-import 'package:shopping_app_using_bloc/model/product_model.dart';
+import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({Key? key, required this.product}) : super(key: key);
-  final ProductModel product;
+  final ProductEntity product;
 
   @override
   Widget build(BuildContext context) {
