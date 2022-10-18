@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/constants/color_constants.dart';
-import 'package:shopping_app_using_bloc/constants/constants.dart';
-import 'package:shopping_app_using_bloc/constants/text_constants.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/bloc/products_bloc.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/screens/cart_screen.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/badge.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/drawer.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/widgets/product_list.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../constants/constants.dart';
+import '../../../../constants/text_constants.dart';
+import '../bloc/products_bloc.dart';
+import 'cart_screen.dart';
+import '../widgets/badge.dart';
+import '../widgets/drawer.dart';
+import '../widgets/product_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,15 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    BlocProvider.of<ProductsBloc>(context)
-        .add(LoadCartFromSharedPreferenceEvent());
-    BlocProvider.of<ProductsBloc>(context)
-        .add(LoadOrdersFromSharedPreferenceEvent());
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: kGreenAccent,
                     child: IconButton(
                       onPressed: () {
-                        BlocProvider.of<ProductsBloc>(context)
-                            .add(NavigateToCartScreenEvent());
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const CartScreen()));
                       },

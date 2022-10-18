@@ -3,6 +3,7 @@ part of 'products_bloc.dart';
 @immutable
 abstract class ProductsEvent {}
 
+
 class GetProductsEvent extends ProductsEvent {}
 
 class IncreaseQuantityEvent extends ProductsEvent {
@@ -25,11 +26,8 @@ class AddToOrdersEvent extends ProductsEvent {
   AddToOrdersEvent({required this.orders});
 }
 
-class NavigateToCartScreenEvent extends ProductsEvent {}
 
-class NavigateToHomeEvent extends ProductsEvent {}
 
-class NavigateToOrdersScreenEvent extends ProductsEvent {}
 
 class AddCartToSharedPreferenceEvent extends ProductsEvent {
   final List<ProductEntity> prods;

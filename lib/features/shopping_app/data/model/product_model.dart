@@ -1,4 +1,4 @@
-import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
+import '../../domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
   ProductModel(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/injection_container.dart';
+import 'injection_container.dart';
 import 'features/shopping_app/presentation/bloc/products_bloc.dart';
 import 'features/shopping_app/presentation/screens/home_screen.dart';
 import 'injection_container.dart' as di;

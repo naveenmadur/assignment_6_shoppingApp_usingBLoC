@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shopping_app_using_bloc/constants/url.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/data/model/product_model.dart';
+import '../../../../constants/url.dart';
+import '../model/product_model.dart';
 import '../../../../core/errors/exception.dart';
 
 abstract class ProductListRemoteDataSource {

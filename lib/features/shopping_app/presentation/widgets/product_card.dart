@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app_using_bloc/constants/color_constants.dart';
-import 'package:shopping_app_using_bloc/constants/constants.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../constants/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_app_using_bloc/constants/text_constants.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/presentation/bloc/products_bloc.dart';
+import '../../../../constants/text_constants.dart';
+import '../bloc/products_bloc.dart';
 import '../../data/model/product_model.dart';
 
 
@@ -17,14 +17,6 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  List<String> localCartList = [];
-  List<ProductModel> loadedCartProducts = [];
-
-  @override
-  void initState() {
-    // _init();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +80,6 @@ class _ProductCardState extends State<ProductCard> {
                                 onTap: () {
                                   BlocProvider.of<ProductsBloc>(context)
                                       .add(AddToCartEvent(index: index));
-                                  // storeData(state.products[index]);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

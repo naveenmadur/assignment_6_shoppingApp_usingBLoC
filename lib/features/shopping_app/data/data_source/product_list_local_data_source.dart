@@ -1,18 +1,23 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopping_app_using_bloc/core/errors/exception.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/data/model/product_model.dart';
-import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
+import '../../../../core/errors/exception.dart';
+import '../model/product_model.dart';
+import '../../domain/entities/product_entity.dart';
 
 abstract class ProductListLocalDataSource {
   Future<List<ProductModel>> getCartItems();
   Future<void> cacheCartItem(List<ProductEntity> prodList);
-  Future<void> clearCacheItem();
+  Future<void> clearCartItem();
+  Future<void> cacheOrderItem(List<ProductEntity> prodList);
+  Future<List<ProductModel>> getOrders();
 }
 
 class ProductListLocalDataSourceImpl implements ProductListLocalDataSource {
   static final Future<SharedPreferences> _prefs =
       SharedPreferences.getInstance();
+  static final Future<SharedPreferences> _prefsOrders =
+      SharedPreferences.getInstance();
+
   @override
   Future<void> cacheCartItem(List<ProductEntity> prodList) async {
     final SharedPreferences prefs = await _prefs;
@@ -39,8 +44,33 @@ class ProductListLocalDataSourceImpl implements ProductListLocalDataSource {
   }
 
   @override
-  Future<void> clearCacheItem() async {
+  Future<void> clearCartItem() async {
     final SharedPreferences prefs = await _prefs;
     prefs.clear();
+  }
+
+  @override
+  Future<void> cacheOrderItem(List<ProductEntity> prodList) async {
+    final SharedPreferences prefs = await _prefsOrders;
+    String encodedData = jsonEncode(prodList);
+    await prefs.setString("orders", encodedData);
+  }
+
+  @override
+  Future<List<ProductModel>> getOrders() async {
+    final SharedPreferences prefs = await _prefsOrders;
+    if (prefs.getString("orders") == null) {
+      throw CacheException();
+    } else {
+      String json = prefs.getString("orders")!;
+      List<ProductModel> decode(String json) {
+        final product = (jsonDecode(json) as List<dynamic>)
+            .map<ProductModel>((item) => ProductModel.fromJson(item))
+            .toList();
+        return product;
+      }
+
+      return decode(json);
+    }
   }
 }
