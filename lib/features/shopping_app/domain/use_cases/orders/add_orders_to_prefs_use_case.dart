@@ -5,8 +5,8 @@ import 'package:shopping_app_using_bloc/core/use_case/use_case.dart';
 import 'package:shopping_app_using_bloc/features/shopping_app/domain/repositories/product_repository.dart';
 import '../../entities/product_entity.dart';
 
-class AddOrdersToPrefs implements UseCase<void, OrdersParams> {
-  AddOrdersToPrefs({
+class AddOrdersToPrefsUseCase implements UseCase<void, OrdersParams> {
+  AddOrdersToPrefsUseCase({
     required this.repo,
   });
   final ProductsRepository repo;

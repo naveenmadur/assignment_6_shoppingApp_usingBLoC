@@ -5,9 +5,9 @@ import 'package:shopping_app_using_bloc/core/use_case/use_case.dart';
 import 'package:shopping_app_using_bloc/features/shopping_app/domain/entities/product_entity.dart';
 import 'package:shopping_app_using_bloc/features/shopping_app/domain/repositories/product_repository.dart';
 
-class GetOrdersFromPrefs implements UseCase<List<ProductEntity>,NoParams> {
+class GetOrdersFromPrefsUseCase implements UseCase<List<ProductEntity>,NoParams> {
   ProductsRepository repo;
-  GetOrdersFromPrefs({
+  GetOrdersFromPrefsUseCase({
     required this.repo,
   });
   

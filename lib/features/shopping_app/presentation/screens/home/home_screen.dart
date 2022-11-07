@@ -1,13 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../constants/color_constants.dart';
-import '../../../../constants/constants.dart';
-import '../../../../constants/text_constants.dart';
-import '../bloc/products_bloc.dart';
-import 'cart_screen.dart';
-import '../widgets/badge.dart';
-import '../widgets/drawer.dart';
-import '../widgets/product_list.dart';
+import 'package:shopping_app_using_bloc/router/app_router.gr.dart';
+import '../../../../../constants/color_constants.dart';
+import '../../../../../constants/constants.dart';
+import '../../../../../constants/text_constants.dart';
+import '../../bloc/products_bloc.dart';
+import '../../widgets/badge.dart';
+import '../../widgets/drawer.dart';
+import '../../widgets/product_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final router = AutoRouter.of(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -49,8 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: kGreenAccent,
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const CartScreen()));
+                        router.push(const CartScreenRoute());
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => const CartScreen()));
                       },
                       icon: const Icon(Icons.shopping_cart),
                       color: kGrey,

@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../constants/color_constants.dart';
-import '../../../../constants/constants.dart';
-import '../bloc/products_bloc.dart';
-import 'home_screen.dart';
-import 'orders_screen.dart';
-import '../widgets/cart_item.dart';
+import 'package:shopping_app_using_bloc/router/app_router.gr.dart';
+import '../../../../../constants/color_constants.dart';
+import '../../../../../constants/constants.dart';
+import '../../bloc/products_bloc.dart';
+import '../home/home_screen.dart';
+import '../orders/orders_screen.dart';
+import '../../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -31,6 +33,7 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
+          final router = AutoRouter.of(context);
           if (state is GetProductsState) {
             final bool isEmpty = state.cart.isEmpty;
             return SafeArea(
@@ -55,18 +58,22 @@ class _CartScreenState extends State<CartScreen> {
                     GestureDetector(
                       onTap: () {
                         if (isEmpty) {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                          // Navigator.of(context).pushReplacement(
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const HomeScreen()));
+                                  router.replace(const HomeScreenRoute());
                         }
                         if (!isEmpty) {
                           BlocProvider.of<ProductsBloc>(context)
                               .add(AddToOrdersEvent(orders: state.cart));
                           BlocProvider.of<ProductsBloc>(context)
                               .add(BuyEvent());
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => const OrdersScreen()));
+                          router.replace(const OrdersScreenRoute());
+                          // Navigator.of(context).pushReplacement(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const OrdersScreen(),
+                          //   ),
+                          // );
                         }
                       },
                       child: Container(

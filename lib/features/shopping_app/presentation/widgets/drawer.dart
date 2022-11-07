@@ -1,15 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_app_using_bloc/router/app_router.gr.dart';
 import '../../../../constants/constants.dart';
 import '../../../../constants/text_constants.dart';
-import '../screens/cart_screen.dart';
-import '../screens/home_screen.dart';
-import '../screens/orders_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final router = AutoRouter.of(context);
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -27,8 +27,9 @@ class AppDrawer extends StatelessWidget {
                   leading: kHomeIcon,
                   title: kDrawerShoppingText,
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
+                    router.replace(const HomeScreenRoute());
+                    // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    //     builder: (context) => const HomeScreen()));
                   },
                 ),
                 kDivider,
@@ -36,8 +37,9 @@ class AppDrawer extends StatelessWidget {
                   leading: const Icon(Icons.shopping_cart),
                   title: kDrawerCartText,
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const CartScreen()));
+                    router.replace(const CartScreenRoute());
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => const CartScreen()));
                   },
                 ),
                 kDivider,
@@ -45,8 +47,9 @@ class AppDrawer extends StatelessWidget {
                   leading: const Icon(Icons.history),
                   title: kDrawerOrderText,
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const OrdersScreen()));
+                    router.replace(const OrdersScreenRoute());
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => const OrdersScreen()));
                   },
                 )
               ],

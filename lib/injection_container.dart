@@ -30,9 +30,9 @@ void init() async {
   sl.registerLazySingleton(() => GetProductListUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetCartFromPrefsUseCase(repo: sl()));
   sl.registerLazySingleton(() => AddCartToPrefsUseCase(repo: sl()));
-  sl.registerLazySingleton(() => ClearCartSharedPrefs(repo: sl()));
-  sl.registerLazySingleton(() => AddOrdersToPrefs(repo: sl()));
-  sl.registerLazySingleton(() => GetOrdersFromPrefs(repo: sl()));
+  sl.registerLazySingleton(() => ClearCartSharedPrefsUseCase(repo: sl()));
+  sl.registerLazySingleton(() => AddOrdersToPrefsUseCase(repo: sl()));
+  sl.registerLazySingleton(() => GetOrdersFromPrefsUseCase(repo: sl()));
 
   //* Repository
   sl.registerLazySingleton<ProductsRepository>(

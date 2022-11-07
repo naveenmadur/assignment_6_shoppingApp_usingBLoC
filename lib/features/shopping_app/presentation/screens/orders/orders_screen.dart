@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../constants/color_constants.dart';
-import '../../../../constants/constants.dart';
-import '../../../../constants/text_constants.dart';
-import '../bloc/products_bloc.dart';
-import '../widgets/order_item.dart';
+import '../../../../../constants/color_constants.dart';
+import '../../../../../constants/constants.dart';
+import '../../../../../constants/text_constants.dart';
+import '../../bloc/products_bloc.dart';
+import '../../widgets/order_item.dart';
 
 
 class OrdersScreen extends StatelessWidget {

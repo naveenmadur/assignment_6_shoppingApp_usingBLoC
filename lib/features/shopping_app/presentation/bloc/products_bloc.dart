@@ -15,9 +15,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetProductListUseCase getProductListUseCase;
   final GetCartFromPrefsUseCase getItemsFromPrefsUseCase;
   final AddCartToPrefsUseCase addToPrefsUseCase;
-  final ClearCartSharedPrefs clearCartSharedPrefs;
-  final AddOrdersToPrefs addOrdersToPrefsUseCase;
-  final GetOrdersFromPrefs getOrdersFromPrefsUseCase;
+  final ClearCartSharedPrefsUseCase clearCartSharedPrefs;
+  final AddOrdersToPrefsUseCase addOrdersToPrefsUseCase;
+  final GetOrdersFromPrefsUseCase getOrdersFromPrefsUseCase;
 
   List<ProductEntity> products = [];
   List<ProductEntity> cart = [];

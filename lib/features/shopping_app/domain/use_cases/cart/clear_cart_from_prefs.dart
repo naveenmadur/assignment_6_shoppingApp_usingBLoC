@@ -4,9 +4,9 @@ import 'package:shopping_app_using_bloc/core/errors/failure.dart';
 import 'package:shopping_app_using_bloc/core/use_case/use_case.dart';
 import 'package:shopping_app_using_bloc/features/shopping_app/domain/repositories/product_repository.dart';
 
-class ClearCartSharedPrefs extends UseCase<void, NoParams> {
+class ClearCartSharedPrefsUseCase extends UseCase<void, NoParams> {
  ProductsRepository repo;
-  ClearCartSharedPrefs({
+  ClearCartSharedPrefsUseCase({
     required this.repo,
   });
 
