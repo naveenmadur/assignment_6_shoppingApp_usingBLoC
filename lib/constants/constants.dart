@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app_using_bloc/constants/color_constants.dart';
+import 'color_constants.dart';
 
 const TextStyle kPriceTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 const TextStyle kTitleTextStyle = TextStyle(color: kGreenAccent,fontSize: 25,fontWeight: FontWeight.bold);
