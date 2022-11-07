@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app_using_bloc/constants/constants.dart';
+import 'constants.dart';
 
 
 const Text kHomeScreenAppBarText =  Text('SHOPPING',style: kTitleTextStyle,);
